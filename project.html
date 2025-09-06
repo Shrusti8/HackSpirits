@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SynergySphere - Project Details</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="project-container">
+    <header>
+      <h1 id="projectTitle">Project Name</h1>
+      <button id="newTaskBtn">+ Add Task</button>
+    </header>
+
+    <ul id="taskList">
+      <!-- Tasks will appear here -->
+    </ul>
+  </div>
+
+  <script src="project.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectId = urlParams.get('projectId');
+    const projectTitle = document.getElementById('projectTitle');
+    projectTitle.textContent = 'Project ' + projectId;
+
+    const tasks = [
+      { id: 1, title: 'Design Homepage', status: 'To-Do' },
+      { id: 2, title: 'Create Logo', status: 'In Progress' }
+    ];
+
+    const taskList = document.getElementById('taskList');
+    tasks.forEach(task => {
+      const li = document.createElement('li');
+      li.textContent = `${task.title} [${task.status}]`;
+      taskList.appendChild(li);
+    });
+
+    document.getElementById('newTaskBtn').addEventListener('click', () => {
+      const title = prompt('Enter task title:');
+      if(title) {
+        alert(`Task "${title}" added!`);
+        // TODO: Add task via API
+      }
+    });
+  </script>
+</body>
+</html>
